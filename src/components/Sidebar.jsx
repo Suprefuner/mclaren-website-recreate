@@ -1,46 +1,169 @@
 import { useState, forwardRef, useImperativeHandle } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { SidebarListItem } from "./"
 import { navLinks, socialMediaLinks } from "../data"
 import { IoMdClose } from "react-icons/io"
 
 const Sidebar = forwardRef((_, ref) => {
+  const [currentHover, setCurrentHover] = useState("racing")
   const [showSidebar, setShowSidebar] = useState(false)
-
+  const [showSubmenu, setShowSubmenu] = useState(false)
+  /*
+  ========================================================
+  * pass state and setState function to parent component
+  ========================================================
+  */
   useImperativeHandle(ref, () => ({
     sidebarState: showSidebar,
     toggleSidebar: (val) => setShowSidebar(val),
   }))
 
+  /*
+  ========================================================
+  * FRAMER MOTION VARIANTS
+  ========================================================
+  */
+  const containerVariant = {
+    hide: {
+      x: "-100%",
+      transition: {
+        ease: "linear",
+        staggerDirection: -1,
+        staggerChildren: 1,
+      },
+    },
+    show: {
+      x: 0,
+      width: showSubmenu ? "48vw" : "35vw",
+      transition: {
+        ease: "linear",
+        delayChildren: 1,
+        staggerChildren: 0.4,
+      },
+    },
+    exit: {
+      x: "-100%",
+      transition: {
+        staggerDirection: -1,
+        delayChildren: 0.4,
+        staggerChildren: 1,
+      },
+    },
+  }
+
+  const itemVariant = {
+    hide: {
+      x: -50,
+      opacity: 0,
+      blur: 5,
+    },
+    show: {
+      x: 0,
+      opacity: 1,
+      blur: 0,
+      transition: {
+        type: "tween",
+        duration: 1,
+      },
+    },
+    exit: {
+      x: -50,
+      opacity: 0,
+      blur: 5,
+      transition: {
+        type: "tween",
+        duration: 1,
+      },
+    },
+  }
+
+  const subMenuVariant = {
+    hide: { opacity: 0, filter: "blur(5px)" },
+    show: {
+      opacity: 1,
+      filter: "blur(0)",
+      transition: { delay: 1 },
+    },
+    exit: { opacity: 0, filter: "blur(5px)" },
+  }
+
   return (
-    <div
-      className={`bg-black/40 h-screen w-[35vw] fixed top-0 z-50 backdrop-blur-md px-5 pb-5 flex flex-col gap-2 text-white capitalize transition-all duration-1000 ${
-        showSidebar ? "left-0 opacity-100" : "-left-[100%] opacity-0"
-      }`}
+    <motion.div
+      variants={containerVariant}
+      initial="hide"
+      animate={showSidebar ? "show" : "hide"}
+      exit="exit"
+      className={`
+      bg-black/40 h-screen w-[35vw] fixed top-0 z-50 
+      flex flex-col
+      backdrop-blur-md px-5 pb-5  
+      text-white capitalize duration-1000 
+      `}
     >
-      <div className="py-3 text-xl cursor-pointer">
+      <motion.div
+        variants={itemVariant}
+        onMouseOver={() => setShowSubmenu(false)}
+        className="py-3 text-xl cursor-pointer"
+      >
         <IoMdClose
           className="transition duration-300 hover:text-gray-400"
           onClick={() => setShowSidebar((prev) => !prev)}
         />
-      </div>
-      <ul className="text-xl">
-        {navLinks.map(({ link }, i) => (
-          <li key={i} className="py-1.5 text-[18px]">
-            {link}
-          </li>
-        ))}
-      </ul>
-      <ul className="mt-auto text-[14px]">
-        <li>enquiry</li>
-        <li>find a dealer</li>
-      </ul>
-      <ul className="flex gap-2 text-xl text-gray-400 ">
-        {Object.values(socialMediaLinks).map(({ icon, url }, i) => (
-          <li key={i}>
-            <a href={url}>{icon}</a>
-          </li>
-        ))}
-      </ul>
-    </div>
+      </motion.div>
+      <motion.div
+        variants={itemVariant}
+        className="flex flex-col w-full h-full gap-2 "
+      >
+        <div className="relative w-[25vw]">
+          <ul className="text-xl ">
+            {navLinks.map(({ link, sublinks }, i) => (
+              <SidebarListItem
+                key={i}
+                link={link}
+                sublinks={sublinks}
+                setCurrentHover={setCurrentHover}
+                setShowSubmenu={setShowSubmenu}
+              />
+            ))}
+            <SidebarListItem
+              link="contact"
+              setCurrentHover={setCurrentHover}
+              setShowSubmenu={setShowSubmenu}
+            />
+          </ul>
+          <AnimatePresence>
+            {showSubmenu ? (
+              <motion.ul
+                variants={subMenuVariant}
+                className="absolute top-0 right-0 pr-10 translate-x-[115%]"
+              >
+                {navLinks
+                  .filter((item) => item.link === currentHover)[0]
+                  .sublinks.map((link, i) => (
+                    <li
+                      key={i}
+                      className="py-1.5 text-[1.8rem] select-none cursor-pointer"
+                    >
+                      {link}
+                    </li>
+                  ))}
+              </motion.ul>
+            ) : null}
+          </AnimatePresence>
+        </div>
+        <ul className="mt-auto text-[14px]">
+          <li>enquiry</li>
+          <li>find a dealer</li>
+        </ul>
+        <ul className="flex gap-2 text-xl text-gray-400 ">
+          {Object.values(socialMediaLinks).map(({ icon, url }, i) => (
+            <li key={i}>
+              <a href={url}>{icon}</a>
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </motion.div>
   )
 })
 export default Sidebar

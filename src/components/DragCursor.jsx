@@ -1,18 +1,14 @@
-import { useState, useEffect, forwardRef } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import logo from "../assets/image/mclaren_logo_sm.png"
 
-const DragCursor = forwardRef((_, ref) => {
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  })
+const TestCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const ref = useRef(null)
 
   useEffect(() => {
     const mouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      })
+      ref.current.style.left = e.clientX - 50 + "px"
+      ref.current.style.top = e.clientY - 50 + "px"
     }
 
     window.addEventListener("mousemove", mouseMove)
@@ -22,23 +18,20 @@ const DragCursor = forwardRef((_, ref) => {
     }
   }, [])
 
-  const variants = {
-    default: {
-      x: mousePosition.x - 50,
-      y: mousePosition.y - 50,
-    },
-  }
-
   return (
-    <motion.div
+    <div
       ref={ref}
-      variants={variants}
-      animate="default"
-      transition={{ type: "tween" }}
-      className="fixed top-0 left-0 w-10 leading-[10rem] text-center text-white bg-black/80 rounded-full aspect-square"
+      className="fixed top-0 left-0 w-10 text-white rounded-full pointer-events-none aspect-square bg-black/20 backdrop-blur-lg backdrop-filter"
     >
-      DragCursor
-    </motion.div>
+      <div className="relative flex flex-col items-center justify-center w-full h-full uppercase opacity-90">
+        <img
+          src={logo}
+          alt=""
+          className="w-6 -mt-1 -mb-1.5 aspect-square invert"
+        />
+        <span>drag</span>
+      </div>
+    </div>
   )
-})
-export default DragCursor
+}
+export default TestCursor

@@ -5,6 +5,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *,
@@ -18,4 +19,14 @@ html {
 body {
   font-family: arial, sans-serif;
   font-size: 1.6rem;
+}
+
+.swiper-slide {
+  filter: grayscale(0.9) brightness(0.3);
+  transition: 0.5s;
+}
+
+.swiper-slide:hover,
+.swiper-slide-active.swiper-slide {
+  filter: grayscale(0) brightness(1);
 }

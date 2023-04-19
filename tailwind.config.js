@@ -56,6 +56,12 @@ export default {
       screens: {
         xs: "450px",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
+      dropShadow: {
+        "3xl": "1rem 2rem 3rem rgba(0,0,0,.7)",
+      },
     },
   },
   plugins: [],
