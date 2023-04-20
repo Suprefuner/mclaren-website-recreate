@@ -33,7 +33,7 @@ const ModelPageCustomSection = () => {
         variants={containerVariant}
         initial="hide"
         whileInView="show"
-        className="text-[12rem] absolute top-1/2 -translate-y-[120%] uppercase px-5 leading-[12rem] text-white"
+        className="text-[12rem] absolute top-1/2 -translate-y-[120%] uppercase px-5 leading-[12rem] text-white lg:left-10"
       >
         <div className="overflow-hidden">
           <motion.div

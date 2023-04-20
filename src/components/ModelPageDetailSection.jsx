@@ -5,7 +5,8 @@ import ceoPhoto from "../assets/image/Zak-Brown.webp"
 
 const ModelPageDetailSection = () => {
   const snap = useSnap()
-  const { name, slogan, articles, modelImages } = modelData[snap.currentModel]
+  const { name, slogan, articles, modelArticleImages, modelSwiperImages } =
+    modelData[snap.currentModel]
 
   return (
     <section className="pt-[12rem] lg:py-[12rem] bg-slate-50 relative">
@@ -42,8 +43,8 @@ const ModelPageDetailSection = () => {
           </div>
 
           <div className="hidden h-full col-span-2 col-start-2 row-span-2 row-start-1 lg:block">
-            {modelImages.map((img, i) => {
-              const height = 100 / modelImages.length + "%"
+            {modelArticleImages.map((img, i) => {
+              const height = 100 / modelArticleImages.length + "%"
               return (
                 <img
                   src={img}
@@ -57,7 +58,9 @@ const ModelPageDetailSection = () => {
           </div>
         </div>
       </div>
-      <ModelPageSwiper images={modelImages} slidesPerView={1} />
+      <div className="lg:hidden">
+        <ModelPageSwiper images={modelArticleImages} slidesPerView={1} />
+      </div>
     </section>
   )
 }

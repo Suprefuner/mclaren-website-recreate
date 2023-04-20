@@ -40,8 +40,8 @@ const Video = ({ model }) => {
         className="absolute object-cover w-full h-full "
       />
       <div className="relative z-30 text-white h-full p-5 pt-[12rem] flex flex-col">
-        <h3 className="text-5xl font-semibold">
-          <AnimatedLetters title={name} inView={true} />
+        <h3 className="text-5xl font-header">
+          <AnimatedLetters title={name} />
         </h3>
         <motion.p
           initial={{ y: 25, opacity: 0 }}

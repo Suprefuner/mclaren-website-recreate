@@ -17,12 +17,12 @@ const ModelPage = () => {
     state.currentModel = model
   }, [location])
 
-  const { videoThumbnail } = modelData[model]
+  const { modelPageHeroImage } = modelData[model]
 
   return (
     <main className={`bg-center`}>
       <img
-        src={videoThumbnail}
+        src={modelPageHeroImage}
         alt={`${model} photo`}
         className="fixed object-cover w-full h-full"
       />

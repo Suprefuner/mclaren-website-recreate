@@ -62,6 +62,9 @@ export default {
       dropShadow: {
         "3xl": "1rem 2rem 3rem rgba(0,0,0,.7)",
       },
+      fontFamily: {
+        header: "Moki",
+      },
     },
   },
   plugins: [],

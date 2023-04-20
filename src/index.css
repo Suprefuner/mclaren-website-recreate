@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: Moki;
+  src: url("./assets/font/Moki-Mono.otf");
+}
+
+:root {
+  --font-header: "moki-mono";
+}
+
 html {
   font-size: 62.5%;
   box-sizing: border-box;

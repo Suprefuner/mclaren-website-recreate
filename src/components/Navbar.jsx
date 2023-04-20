@@ -56,20 +56,18 @@ const Navbar = ({ sidebarState, toggleSidebar }) => {
       initial="hide"
       animate="show"
       exit="exit"
-      className="fixed z-50 w-full text-white bg-black/30 backdrop-blur-sm"
+      className={`fixed z-50 w-full h-[6.5rem] text-white bg-black/30 backdrop-blur-sm transition-all
+      ${snap.showNavbar ? "top-0" : "-top-[6.5rem]"}`}
     >
-      <motion.div className="relative flex items-center justify-between px-3 py-2 sm:px-5 2xl:px-[15rem] overflow-hidden">
+      <motion.div className="relative flex items-center justify-between px-3 h-full sm:px-5 2xl:px-[15rem] overflow-hidden">
         <motion.div
           variants={itemVariant}
           onClick={() => toggleSidebar(!sidebarState)}
         >
           <HiOutlineMenuAlt4 className="text-[22px] cursor-pointer hover:text-gray-500 transition duration-300" />
         </motion.div>
-        <motion.div variants={itemVariant}>
-          <Link
-            to="/"
-            className="absolute inline-block -translate-x-1/2 -translate-y-1 left-1/2"
-          >
+        <motion.div variants={itemVariant} className="absolute left-1/2">
+          <Link to="/" className="inline-block -translate-x-1/2">
             <img
               src={logo}
               alt="mclaren logo"

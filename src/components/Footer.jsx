@@ -1,7 +1,6 @@
 import logo from "../assets/image/mclaren_logo.png"
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { navLinks } from "../data"
-import { Navlink, Sublinks } from "./"
+import { Navlink } from "./"
 
 const Footer = () => {
   return (

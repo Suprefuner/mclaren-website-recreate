@@ -26,7 +26,7 @@ const HeroSection = () => {
       />
       <div className="container relative w-full h-full">
         <div className="absolute right-0 text-white bottom-8">
-          <h2 className="text-8xl lg:text-[10rem] 2xl:text-[10rem] uppercase">
+          <h2 className="text-8xl lg:text-[10rem] 2xl:text-[9rem] uppercase font-header">
             <AnimatedLetters title={`McLaren ${name}`} />
           </h2>
           <motion.div

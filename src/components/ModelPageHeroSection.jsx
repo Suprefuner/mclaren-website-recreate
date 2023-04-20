@@ -6,16 +6,14 @@ import {
   ModelPageSwiper,
 } from "./"
 import useSnap from "../hooks/useSnap"
-import img from "../assets/image/mclaren_elva.jpg"
-import img2 from "../assets/image/mclaren_720.jpg"
+import { modelData } from "../data"
 
 const ModelPageHeroSection = () => {
   const snap = useSnap()
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
 
-  // FIXME
-  const tempSwiperImages = [img, img2]
+  const { modelSwiperImages } = modelData[snap.currentModel]
 
   return (
     <motion.section className="flex items-start justify-between pt-[100vh] relative text-white z-10">
@@ -29,14 +27,45 @@ const ModelPageHeroSection = () => {
       ======================================================*/}
       <div className="absolute z-20 flex items-start justify-between w-full px-5 top-10">
         <motion.h2
-          key="header"
-          initial={{ y: 50 }}
-          animate={{ y: 0 }}
-          exit={{ y: 50 }}
-          className="text-5xl font-semibold uppercase xs:text-7xl xl:text-8xl"
+          className="text-5xl leading-[10rem] uppercase xs:text-7xl xl:text-8xl font-header"
+          style={{
+            WebkitTextStroke: "1px white",
+            WebkitTextFillColor: "transparent",
+          }}
         >
-          McLaren <br />
-          {snap.currentModel}
+          <motion.span
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{
+              type: "tween",
+              duration: 1,
+              delay: 0.5,
+            }}
+            className="inline-block"
+          >
+            McLaren
+          </motion.span>
+          <br />
+          <motion.span
+            initial={{
+              x: 300,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              WebkitTextStroke: "0px",
+              WebkitTextFillColor: "rgba(255,255,255,.8)",
+            }}
+            transition={{
+              type: "tween",
+              duration: 1,
+              delay: 0.5,
+            }}
+            className="inline-block"
+          >
+            {snap.currentModel}
+          </motion.span>
         </motion.h2>
         <ModelStatsCard />
       </div>
@@ -46,7 +75,7 @@ const ModelPageHeroSection = () => {
         <div className="px-0 sm:px-3 lg:px-5">
           <ModelPageStatsList />
         </div>
-        <ModelPageSwiper images={tempSwiperImages} slidesPerView={1.2} />
+        <ModelPageSwiper images={modelSwiperImages} slidesPerView={1.2} />
       </div>
     </motion.section>
   )

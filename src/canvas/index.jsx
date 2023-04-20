@@ -25,12 +25,16 @@ const CanvasModel = ({ autoRotate = true, model, showButton = true }) => {
         {showButton ? (
           <Html fullscreen>
             <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              whileHover={{ scale: 1.1 }}
-              transition={{
-                duration: 0.2,
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{
+                y: 0,
+                opacity: 1,
+                transition: {
+                  delay: 1,
+                  duration: 0.5,
+                },
               }}
+              whileHover={{ scale: 1.1 }}
               viewport={{
                 amount: "all",
                 margin: "100px 0px 0px 0px",
@@ -38,12 +42,13 @@ const CanvasModel = ({ autoRotate = true, model, showButton = true }) => {
               className="
               grid place-content-center
               absolute top-[32vh] right-[22vw] -translate-x-1/2
-              w-[15rem] aspect-square bg-white/90 rounded-full
-              text-xl font-semibold capitalize cursor-pointer
-              border border-white
+              w-[15rem] aspect-square bg-black/90 rounded-full
+              text-xl text-white font-semibold uppercase cursor-pointer
+              border border-gray-800
               "
               style={{
-                boxShadow: "inset -5px 5px 1rem -0.2rem rgba(0, 0, 0, 0.2)",
+                boxShadow:
+                  "inset -5px 5px 1rem -0.2rem rgba(255, 255, 255, 0.1)",
               }}
               onClick={() => navigate(`/configure/${name}`)}
             >

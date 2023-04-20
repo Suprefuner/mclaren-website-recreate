@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom"
 import { AnimatePresence, motion } from "framer-motion"
 import { BsChevronDown } from "react-icons/bs"
 import { StatsCardProgressbar } from "./"
-import img from "../assets/image/mclaren_720.jpg"
 import useSnap from "../hooks/useSnap"
 import { modelData } from "../data"
 
 const ModelStatsCard = () => {
-  const [showDetail, setShowDetail] = useState(false)
+  const [showDetail, setShowDetail] = useState(true)
   const snap = useSnap()
   const navigate = useNavigate()
 
-  const { data } = modelData[snap.currentModel]
+  const { data, statscardThumbnail } = modelData[snap.currentModel]
 
   const toggleDetail = () => setShowDetail((prev) => !prev)
 
@@ -71,7 +70,11 @@ const ModelStatsCard = () => {
             className="overflow-hidden"
           >
             <motion.div variants={itemVariant} transition={{ type: "tween" }}>
-              <img src={img} alt="" />
+              <img
+                src={statscardThumbnail}
+                alt=""
+                className="object-cover w-full h-[35rem]"
+              />
               <div className="p-2 space-y-1 uppercase">
                 {Object.entries(data).map((stats, i) => (
                   <StatsCardProgressbar key={i} stats={stats} />

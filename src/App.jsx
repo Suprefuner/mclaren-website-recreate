@@ -23,12 +23,10 @@ function App() {
           </motion.div>
         ) : (
           <BrowserRouter>
-            {snap.showNavbar ? (
-              <Navbar
-                toggleSidebar={toggleSidebar}
-                sidebarState={sidebarRef?.current?.sidebarState}
-              />
-            ) : null}
+            <Navbar
+              toggleSidebar={toggleSidebar}
+              sidebarState={sidebarRef?.current?.sidebarState}
+            />
             <Sidebar ref={sidebarRef} />
             <Routes>
               <Route path="/" element={<HomePage />} />

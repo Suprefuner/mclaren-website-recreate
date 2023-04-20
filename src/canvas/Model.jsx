@@ -9,7 +9,6 @@ const Model = ({ model }) => {
   const snap = useSnap()
 
   const { scene, materials } = useGLTF(model)
-  console.log(materials)
 
   useEffect(() => {
     if (!materials) return
@@ -30,14 +29,7 @@ const Model = ({ model }) => {
   const stateString = JSON.stringify(snap)
 
   return (
-    <motion.group
-      ref={groupRef}
-      key={stateString}
-      onClick={(e) => {
-        e.stopPropagation()
-        console.log(e.object.material)
-      }}
-    >
+    <motion.group ref={groupRef} key={stateString}>
       <primitive object={scene} />
     </motion.group>
   )

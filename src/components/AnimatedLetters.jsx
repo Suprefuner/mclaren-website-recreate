@@ -22,14 +22,13 @@ const letterVar = {
   },
 }
 
-export default function AnimatedLetters({ title, inView }) {
+export default function AnimatedLetters({ title }) {
   return (
     <motion.div
       variants={containerVar}
       initial="initial"
-      animate={inView ? "" : "animate"}
-      whileInView={inView ? "animate" : ""}
-      viewport={inView ? { once: true } : null}
+      whileInView="animate"
+      viewport={{ once: true }}
       className="overflow-hidden"
     >
       {[...title].map((letter, i) => (
