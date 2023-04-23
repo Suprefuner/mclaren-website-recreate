@@ -5,7 +5,7 @@ import { navLinks, socialMediaLinks } from "../data"
 import { IoMdClose } from "react-icons/io"
 
 const Sidebar = forwardRef((_, ref) => {
-  const [currentHover, setCurrentHover] = useState("racing")
+  const [currentHover, setCurrentHover] = useState("")
   const [showSidebar, setShowSidebar] = useState(false)
   const [showSubmenu, setShowSubmenu] = useState(false)
   /*
@@ -30,6 +30,7 @@ const Sidebar = forwardRef((_, ref) => {
         ease: "linear",
         staggerDirection: -1,
         staggerChildren: 1,
+        duration: 0.2,
       },
     },
     show: {
@@ -39,6 +40,7 @@ const Sidebar = forwardRef((_, ref) => {
         ease: "linear",
         delayChildren: 1,
         staggerChildren: 0.4,
+        duration: 0.2,
       },
     },
     exit: {
@@ -78,11 +80,15 @@ const Sidebar = forwardRef((_, ref) => {
   }
 
   const subMenuVariant = {
-    hide: { opacity: 0, filter: "blur(5px)" },
+    hide: {
+      opacity: 0,
+      filter: "blur(5px)",
+      transition: { duration: 0.5 },
+    },
     show: {
       opacity: 1,
       filter: "blur(0)",
-      transition: { delay: 1 },
+      transition: { duration: 0.5 },
     },
     exit: { opacity: 0, filter: "blur(5px)" },
   }
@@ -102,7 +108,10 @@ const Sidebar = forwardRef((_, ref) => {
     >
       <motion.div
         variants={itemVariant}
-        onMouseOver={() => setShowSubmenu(false)}
+        onMouseOver={() => {
+          setCurrentHover("")
+          setShowSubmenu(false)
+        }}
         className="py-3 text-xl cursor-pointer"
       >
         <IoMdClose
@@ -114,7 +123,7 @@ const Sidebar = forwardRef((_, ref) => {
         variants={itemVariant}
         className="flex flex-col w-full h-full gap-2 "
       >
-        <div className="relative w-[25vw]">
+        <div className="relative w-[20vw]">
           <ul className="text-xl ">
             {navLinks.map(({ link, sublinks }, i) => (
               <SidebarListItem
@@ -132,23 +141,27 @@ const Sidebar = forwardRef((_, ref) => {
             />
           </ul>
           <AnimatePresence>
-            {showSubmenu ? (
-              <motion.ul
-                variants={subMenuVariant}
-                className="absolute top-0 right-0 pr-10 translate-x-[115%]"
-              >
-                {navLinks
-                  .filter((item) => item.link === currentHover)[0]
-                  .sublinks.map((link, i) => (
-                    <li
-                      key={i}
-                      className="py-1.5 text-[1.8rem] select-none cursor-pointer"
-                    >
-                      {link}
-                    </li>
-                  ))}
-              </motion.ul>
-            ) : null}
+            {showSubmenu
+              ? navLinks.map((links) => (
+                  <motion.ul
+                    key={links.link}
+                    variants={subMenuVariant}
+                    initial="hide"
+                    animate={currentHover === links.link ? "show" : "hide"}
+                    exit="exit"
+                    className={`absolute top-0 right-0 pr-10 translate-x-[115%] opacity-0 transition blur-[5px]`}
+                  >
+                    {links.sublinks.map((link, i) => (
+                      <li
+                        key={i}
+                        className="py-1.5 text-[1.8rem] select-none cursor-pointer"
+                      >
+                        {link}
+                      </li>
+                    ))}
+                  </motion.ul>
+                ))
+              : null}
           </AnimatePresence>
         </div>
         <ul className="mt-auto text-[14px]">
