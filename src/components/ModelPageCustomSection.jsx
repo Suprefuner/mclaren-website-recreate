@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { motion } from "framer-motion"
 import CanvasModel from "../canvas"
 import useSnap from "../hooks/useSnap"
@@ -52,7 +53,9 @@ const ModelPageCustomSection = () => {
           </motion.div>
         </div>
       </motion.h1>
-      <CanvasModel model={modelData[snap.currentModel].name} />
+      <Suspense fallback={null}>
+        <CanvasModel model={modelData[snap.currentModel].name} />
+      </Suspense>
     </section>
   )
 }

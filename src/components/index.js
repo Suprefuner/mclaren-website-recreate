@@ -28,6 +28,7 @@ import Loader from "./Loader"
 import CountNumber from "./CountNumber"
 import SidebarListItem from "./SidebarListItem"
 import StatsCardProgressbar from "./StatsCardProgressbar"
+import ModelLoader from "./ModelLoader"
 
 export {
   Navbar,
@@ -60,4 +61,5 @@ export {
   CountNumber,
   SidebarListItem,
   StatsCardProgressbar,
+  ModelLoader,
 }

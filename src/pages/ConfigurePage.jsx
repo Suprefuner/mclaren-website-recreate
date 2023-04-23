@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, Suspense } from "react"
 import { useParams } from "react-router-dom"
 import { modelData } from "../data"
 import bg from "../assets/image/config_bg.jpg"
 import { ConfigPanel } from "../components"
 import CanvasModel from "../canvas"
 import state from "../store"
+import { ModelLoader } from "../components"
 
 export default function ConfigurePage() {
   const containerRef = useRef(null)

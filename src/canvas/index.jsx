@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
 import {
   OrbitControls,
@@ -8,6 +9,7 @@ import {
 } from "@react-three/drei"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import { ModelLoader } from "../components"
 import Model from "./Model"
 import { modelData } from "../data"
 
@@ -22,58 +24,60 @@ const CanvasModel = ({ autoRotate = true, model, showButton = true }) => {
         gl={{ preserveDrawingBuffer: true }}
         className="bg-transparent pointer-events-none"
       >
-        {showButton ? (
-          <Html fullscreen>
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{
-                y: 0,
-                opacity: 1,
-                transition: {
-                  delay: 1,
-                  duration: 0.5,
-                },
-              }}
-              whileHover={{ scale: 1.1 }}
-              viewport={{
-                amount: "all",
-                margin: "100px 0px 0px 0px",
-              }}
-              className="
+        <Suspense fallback={<ModelLoader />}>
+          {showButton ? (
+            <Html fullscreen>
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{
+                  y: 0,
+                  opacity: 1,
+                  transition: {
+                    delay: 1,
+                    duration: 0.5,
+                  },
+                }}
+                whileHover={{ scale: 1.1 }}
+                viewport={{
+                  amount: "all",
+                  margin: "100px 0px 0px 0px",
+                }}
+                className="
               grid place-content-center
               absolute top-[32vh] right-[22vw] -translate-x-1/2
               w-[15rem] aspect-square bg-black/90 rounded-full
               text-xl text-white font-semibold uppercase cursor-pointer
               border border-gray-800
               "
-              style={{
-                boxShadow:
-                  "inset -5px 5px 1rem -0.2rem rgba(255, 255, 255, 0.1)",
-              }}
-              onClick={() => navigate(`/configure/${name}`)}
-            >
-              custom
-            </motion.div>
-          </Html>
-        ) : null}
+                style={{
+                  boxShadow:
+                    "inset -5px 5px 1rem -0.2rem rgba(255, 255, 255, 0.1)",
+                }}
+                onClick={() => navigate(`/configure/${name}`)}
+              >
+                custom
+              </motion.div>
+            </Html>
+          ) : null}
 
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-1, 8, 5]} intensity={2} />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[-1, 8, 5]} intensity={2} />
 
-        <Environment preset="city" />
-        <Center>
-          <Model model={modelUrl} />
-        </Center>
-        <OrbitControls
-          autoRotate={autoRotate}
-          enablePan={false}
-          enableRotate={!autoRotate}
-          enableZoom={!autoRotate}
-          minPolarAngle={Math.PI / 3}
-          maxPolarAngle={Math.PI - Math.PI / 2}
-          minDistance={0.5}
-          maxDistance={3.5}
-        />
+          <Environment preset="city" />
+          <Center>
+            <Model model={modelUrl} />
+          </Center>
+          <OrbitControls
+            autoRotate={autoRotate}
+            enablePan={false}
+            enableRotate={!autoRotate}
+            enableZoom={!autoRotate}
+            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI - Math.PI / 2}
+            minDistance={0.5}
+            maxDistance={3.5}
+          />
+        </Suspense>
       </Canvas>
     </section>
   )
