@@ -51,7 +51,6 @@ export default {
     extend: {
       colors: {
         header: "#f84874",
-        // primary: "#ff9900",
       },
       screens: {
         xs: "450px",

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Navbar, Sidebar, Footer, Loader } from "./components"
@@ -6,7 +6,7 @@ import { HomePage, ModelPage, ConfigurePage } from "./pages/"
 import useSnap from "./hooks/useSnap"
 
 function App() {
-  const [isLoading, setIsLoading] = useState(0)
+  const [isLoading, setIsLoading] = useState(1)
   const sidebarRef = useRef(null)
   const snap = useSnap()
 

@@ -39,12 +39,15 @@ export const socialMediaLinks = {
 }
 
 import elvaVideoThumbnail from "./assets/image/mclaren_elva_video_image.jpg"
+import elvaVideoThumbnailMobile from "./assets/image/elav_explore_hero_image.webp"
 import arturaVideoThumbnail from "./assets/image/mclaren_artura.jpg"
 import mc720VideoThumbnail from "./assets/image/mclaren_720.jpg"
 import homePageModelElva from "./assets/image/model_section_elva.png"
 import homePageModelMc720 from "./assets/image/model_section_mc720.png"
 import homePageModelArtura from "./assets/image/model_section_artura.png"
 import homePageHeroImage from "./assets/image/mclaren_elva.jpg"
+import homePageHeroImageMobile from "./assets/image/elav_home_hero_image_mobile.webp"
+
 import elvaModelPageHero from "./assets/image/elva_model_page_hero_section.jpg"
 import elvaModelPageSwipe1 from "./assets/image/elva_model_page_swiper-1.jpg"
 import elvaModelPageSwipe2 from "./assets/image/elva_model_page_swiper-2.jpg"
@@ -82,9 +85,11 @@ export const modelData = {
     description: "powerful roadster & lightest McLaren",
     slogan: "Formed by the wind",
     homePageHeroImage,
+    homePageHeroImageMobile,
     homePageModelImage: homePageModelElva,
     modelPageHeroImage: elvaModelPageHero,
     videoThumbnail: elvaVideoThumbnail,
+    videoThumbnailMobile: elvaVideoThumbnailMobile,
     videoUrl:
       "https://res.cloudinary.com/dytia9net/video/upload/v1681624003/video/Air_Power_-_McLaren_Elva_sb6qev",
     modelUrl: "/models/mclaren_elva.glb",

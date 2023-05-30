@@ -1,5 +1,5 @@
-import HomePage from "./HomePage"
-import ModelPage from "./ModelPage"
-import ConfigurePage from "./ConfigurePage"
+import HomePage from "./home page/HomePage"
+import ModelPage from "./model page/ModelPage"
+import ConfigurePage from "./config page/ConfigurePage"
 
 export { HomePage, ModelPage, ConfigurePage }
