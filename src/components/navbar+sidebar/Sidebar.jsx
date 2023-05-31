@@ -1,18 +1,25 @@
 import { useState, forwardRef, useImperativeHandle } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { IoMdClose } from "react-icons/io"
+
 import { SidebarListItem } from ".."
 import { navLinks, socialMediaLinks } from "../../data"
-import { IoMdClose } from "react-icons/io"
+import useResize from "../../hooks/useResize"
 
 const Sidebar = forwardRef((_, ref) => {
   const [currentHover, setCurrentHover] = useState("")
   const [showSidebar, setShowSidebar] = useState(false)
   const [showSubmenu, setShowSubmenu] = useState(false)
+  const { windowWidth } = useResize()
   /*
   ========================================================
   * pass state and setState function to parent component
   ========================================================
   */
+  useImperativeHandle(ref, () => ({
+    sidebarState: showSidebar,
+    toggleSidebar: (val) => setShowSidebar(val),
+  }))
 
   /*
   ========================================================
@@ -31,7 +38,7 @@ const Sidebar = forwardRef((_, ref) => {
     },
     show: {
       x: 0,
-      width: showSubmenu ? "48vw" : "35vw",
+      width: windowWidth <= 1024 ? "100vw" : showSubmenu ? "48vw" : "35vw",
       transition: {
         ease: "linear",
         delayChildren: 1,
@@ -91,11 +98,6 @@ const Sidebar = forwardRef((_, ref) => {
 
   //========================================================
 
-  useImperativeHandle(ref, () => ({
-    sidebarState: showSidebar,
-    toggleSidebar: (val) => setShowSidebar(val),
-  }))
-
   return (
     <motion.div
       variants={containerVariant}
@@ -103,9 +105,10 @@ const Sidebar = forwardRef((_, ref) => {
       animate={showSidebar ? "show" : "hide"}
       exit="exit"
       className={`
-      bg-black/40 h-screen w-[35vw] fixed top-0 z-50 
+      fixed top-0 z-50
       flex flex-col
-      backdrop-blur-md px-5 pb-5  
+      h-screen px-5 pb-5
+      bg-black/40 backdrop-blur-md 
       text-white capitalize duration-1000 
       `}
     >

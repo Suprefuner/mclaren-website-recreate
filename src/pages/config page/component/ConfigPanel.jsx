@@ -1,32 +1,13 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { configColor } from "../../../data"
 import useSnap from "../../../hooks/useSnap"
+import useResize from "../../../hooks/useResize"
 
 export default function ConfigPanel({ dragContainer }) {
-  const [windowWidth, setWindowWidth] = useState(0)
   const [currentConfig, setCurrentConfig] = useState("body")
   const snap = useSnap()
-
-  useEffect(() => {
-    let requestId = null
-
-    const handleResize = () => {
-      if (requestId) return
-      requestId = requestAnimationFrame(() => {
-        setWindowWidth(window.innerWidth)
-        requestId = null
-      })
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
-  useEffect(() => {
-    console.log({ windowWidth })
-  }, [windowWidth])
+  const { windowWidth } = useResize()
 
   return (
     <motion.div
@@ -75,7 +56,6 @@ export default function ConfigPanel({ dragContainer }) {
           layout
           className="grid grid-cols-5 gap-1 p-2 bg-white rounded-[2rem] "
         >
-          {/* <AnimatePresence mode="wait"> */}
           <AnimatePresence>
             {configColor[currentConfig].map((color, i) => (
               <motion.div
