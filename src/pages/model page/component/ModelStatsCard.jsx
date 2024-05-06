@@ -54,8 +54,8 @@ const ModelStatsCard = () => {
             </li>
           ))}
         </ul>
-        <div className="p-2 border-l cursor-pointer" onClick={toggleDetail}>
-          <motion.div animate={{ rotate: showDetail ? 180 : 0 }}>
+        <div className="p-2 border-l border-[rgba(255,255,255,.3)] cursor-pointer" onClick={toggleDetail}>
+          <motion.div animate={{ rotate: showDetail ? 180 : 0 }} transition={{ ease: "easeInOut" }}>
             <BsChevronDown />
           </motion.div>
         </div>

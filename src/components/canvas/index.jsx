@@ -31,22 +31,19 @@ const CanvasModel = ({ autoRotate = true, model, showButton = true }) => {
                     duration: 0.5,
                   },
                 }}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{
+                  scale: 1.1
+                }}
                 viewport={{
-                  amount: "all",
-                  margin: "100px 0px 0px 0px",
+                  once: true
                 }}
                 className="
-              grid place-content-center
-              absolute top-[32vh] right-[22vw] -translate-x-1/2
-              w-[15rem] aspect-square bg-black/90 rounded-full
-              text-xl text-white font-semibold uppercase cursor-pointer
-              border border-gray-800
-              "
-                style={{
-                  boxShadow:
-                    "inset -5px 5px 1rem -0.2rem rgba(255, 255, 255, 0.1)",
-                }}
+                  grid place-content-center
+                  absolute top-[32vh] right-[22vw] -translate-x-1/2
+                  w-[15rem] aspect-square bg-black/90 rounded-full
+                  text-xl text-white font-semibold uppercase 
+                  border border-gray-800 cursor-pointer hover:scale-110"
+                style={{ boxShadow: "inset -5px 5px 1rem -0.2rem rgba(255, 255, 255, 0.1)" }}
                 onClick={() => navigate(`/configure/${name}`)}
               >
                 custom
@@ -56,11 +53,14 @@ const CanvasModel = ({ autoRotate = true, model, showButton = true }) => {
 
           <ambientLight intensity={0.5} />
           <directionalLight position={[-1, 8, 5]} intensity={2} />
-
+          {/*
           <Environment preset="city" />
+          */}
+
           <Center>
             <Model model={modelUrl} />
           </Center>
+
           <OrbitControls
             autoRotate={autoRotate}
             enablePan={false}

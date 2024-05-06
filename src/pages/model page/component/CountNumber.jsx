@@ -7,7 +7,8 @@ export default function CountNumber({ from, to, start }) {
   useEffect(() => {
     if (!start) return
     const controls = animate(from, to, {
-      duration: 1.5,
+      duration: 3,
+      ease: [.04, .14, .01, 1],
       onUpdate(value) {
         ref.current.textContent = value.toFixed(to % 1 ? 1 : 0)
       },

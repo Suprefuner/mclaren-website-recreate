@@ -7,17 +7,18 @@ const ModelSectionModelImage = ({ name, image }) => {
 
   useEffect(() => {
     if (!inView) return
-    state.currentModel = entry?.target?.dataset.model
+    state.currentModel = entry?.target?.querySelector('img').dataset.model
   }, [inView])
 
   return (
-    <img
-      ref={ref}
-      src={image}
-      alt={`McLaren ${name} photo`}
-      className="w-[70vw] h-auto object-contain translate-y-[10rem] pointer-events-none drop-shadow-3xl "
-      data-model={name}
-    />
+    <div ref={ref} className="w-[70vw] h-[60vh] min-h-[560px]">
+      <img
+        src={image}
+        alt={`McLaren ${name} photo`}
+        className="w-full h-full object-contain pointer-events-none drop-shadow-3xl translate-y-4"
+        data-model={name}
+      />
+    </div>
   )
 }
 export default ModelSectionModelImage

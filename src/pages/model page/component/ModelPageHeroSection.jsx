@@ -47,7 +47,7 @@ const ModelPageHeroSection = () => {
     show: {
       x: 0,
       opacity: 1,
-      WebkitTextStroke: "0px",
+      WebkitTextStroke: "1px",
       WebkitTextFillColor: "rgba(255,255,255,.8)",
       transition: {
         type: "tween",
@@ -79,7 +79,7 @@ const ModelPageHeroSection = () => {
           xs:leading-[7.5rem] sm:leading-[10rem]
           text-4xl xs:text-5xl sm:text-7xl xl:text-8xl "
           style={{
-            WebkitTextStroke: "1px white",
+            WebkitTextStroke: "1px rgba(255,255,255,.8)",
             WebkitTextFillColor: "transparent",
           }}
         >
