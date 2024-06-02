@@ -10,7 +10,9 @@ const Sidebar = forwardRef((_, ref) => {
   const [currentHover, setCurrentHover] = useState("")
   const [showSidebar, setShowSidebar] = useState(false)
   const [showSubmenu, setShowSubmenu] = useState(false)
+  
   const { windowWidth } = useResize()
+  console.log(windowWidth);
   /*
   ========================================================
   * pass state and setState function to parent component

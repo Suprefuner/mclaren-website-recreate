@@ -49,7 +49,7 @@ const ModelSection = () => {
           </motion.div>
         </AnimatePresence>
         <motion.div
-          className="flex items-center w-[240vw] h-full px-[15vw] absolute inset-0"
+          className="flex items-end w-[240vw] h-full px-[15vw] absolute inset-0 lg:items-center"
           drag="x"
           dragConstraints={containerRef}
           dragElastic={0.1}

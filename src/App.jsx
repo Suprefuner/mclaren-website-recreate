@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { motion, AnimatePresence } from "framer-motion"
-import { Navbar, Sidebar, Footer, Loader } from "./components"
-import { HomePage, ModelPage, ConfigurePage } from "./pages/"
+import { AnimatePresence, motion } from "framer-motion"
+import { useRef, useState } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Footer, Loader, Navbar, Sidebar } from "./components"
 import useSnap from "./hooks/useSnap"
+import { ConfigurePage, HomePage, ModelPage } from "./pages/"
 
 function App() {
   const [isLoading, setIsLoading] = useState(1)

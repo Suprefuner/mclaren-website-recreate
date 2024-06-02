@@ -19,9 +19,9 @@ export default function ConfigPanel({ dragContainer }) {
       className="
       w-full sm:max-w-[40rem]
       bg-white/50 backdrop-blur-md
-      absolute bottom-0 right-0 z-[1000]
+      absolute top-[65px] lg:top-[unset] lg:bottom-0 right-0 z-[1000] 
       border border-white rounded-[3rem] 
-      shadow-[inset_0_8rem_0px_0_white]
+      shadow-[inset_0_8rem_0px_0_white] cursor-grab active:cursor-grabbing
     "
     >
       <motion.div

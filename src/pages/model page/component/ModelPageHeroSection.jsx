@@ -69,9 +69,9 @@ const ModelPageHeroSection = () => {
       ======================================================*/}
       <div
         className="
-      absolute top-10 z-20 
-      flex items-start justify-between 
-      w-full px-3 xs:px-5 "
+        absolute top-10 z-20 
+        flex items-start justify-between 
+        w-full px-3 xs:px-5"
       >
         <h2
           className="
